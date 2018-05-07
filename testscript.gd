@@ -15,19 +15,23 @@ export var civ3root = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Sid Me
 
 func _ready():
 	randomize()
-	var image_from_code = readpcx("/Conquests/Art/SmallHeads/popHeads.pcx")
-	# sprite from code only
-	var sprite_from_code = Sprite.new()
-	# Create texture from image
-	var texture_from_image = ImageTexture.new()
-	texture_from_image.create_from_image(image_from_code)
-	# apply texture to Sprite
-	sprite_from_code.texture = texture_from_image
+	terrainplay()
+	showsomepopheads()
+	pass
+
+func terrainplay():
+	var image = readpcx(civ3root + "/Art/Terrain/xpgc.pcx")
+	var sprite = civcolorsprite(image)
+#	sprite.hframes = 9
+#	sprite.vframes = 9
+	sprite.centered = false
+	add_child(sprite)
+	
+
+func showsomepopheads():
+	var image_from_code = readpcx(civ3root + "/Conquests/Art/SmallHeads/popHeads.pcx")
+	var sprite_from_code = civcolorsprite(image_from_code)
 	sprite_from_code.apply_scale(Vector2(2, 2))
-	# add shader
-	var throwsomeshade = ShaderMaterial.new()
-	throwsomeshade.shader = CIVCOLORSHADER
-	sprite_from_code.material = throwsomeshade
 	for i in range(24):
 		sprite_from_code.region_enabled = true
 		var whichsprite = randi() % 180
@@ -37,18 +41,30 @@ func _ready():
 		sprite_from_code.position.y = i * 20 + 70
 		# sprite_from_code.centered = false
 		# add sprite to scene
-		print(sprite_from_code.vframes)
-		print(sprite_from_code.hframes)
 		add_child(sprite_from_code)
 		sprite_from_code = sprite_from_code.duplicate()
-	pass
+
+# Given an image, returns a sprite object with a civ color shader
+func civcolorsprite(image):
+	# Create texture from image
+	var texture = ImageTexture.new()
+	texture.create_from_image(image)
+	# sprite from code only
+	var sprite = Sprite.new()
+	# apply texture to Sprite
+	sprite.texture = texture
+	# add shader
+	var throwsomeshade = ShaderMaterial.new()
+	throwsomeshade.shader = CIVCOLORSHADER
+	sprite.material = throwsomeshade
+	return sprite
 
 # Given a filename, reads a PCX file, modifies the palette and returns an Image object
 func readpcx(filename):
 	# not a generalized pcx reader
 	# assumes 8-bit image with 256-color 8-bit rgb palette
 	var file = File.new()
-	file.open(civ3root + filename, file.READ)
+	file.open(filename, file.READ)
 	# seek to margins
 	file.seek(0x4)
 	var leftmargin = file.get_16()
@@ -57,15 +73,11 @@ func readpcx(filename):
 	var bottommargin = file.get_16()
 	var width = rightmargin - leftmargin
 	var height = bottommargin - topmargin
-	print(width)
-	print(height)
 	# seek to bytes per scanline; assuming 1 color plane
 	file.seek(0x42)
 	# this is always even, so last byte may be junk if image width is odd
 	var bytesperline = file.get_16()
-	print(bytesperline)
 	var imagelength = bytesperline * height
-	print(imagelength)
 	# seek to palette, 256*3 bytes from end of file
 	file.seek_end(-(256*3))
 	var palettebytes = file.get_buffer(256*3)
