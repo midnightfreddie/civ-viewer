@@ -50,10 +50,10 @@ func showsomepopheads():
 		sprite_from_code = sprite_from_code.duplicate()
 
 # Given an image, returns a sprite object with a civ color shader
-func civcolorsprite(image):
+func civcolorsprite(image, flags = 0):
 	# Create texture from image
 	var texture = ImageTexture.new()
-	texture.create_from_image(image)
+	texture.create_from_image(image, flags)
 	# sprite from code only
 	var sprite = Sprite.new()
 	# apply texture to Sprite
