@@ -22,16 +22,21 @@ func _ready():
 func terrainplay():
 	var image = readpcx(civ3root + "/Art/Terrain/xpgc.pcx")
 	var sprite = civcolorsprite(image)
-#	sprite.hframes = 9
-#	sprite.vframes = 9
-	sprite.centered = false
-	add_child(sprite)
+	sprite.hframes = 9
+	sprite.vframes = 9
+#	sprite.centered = false
+	for i in range(180):
+		sprite.position.x = (i % 9) * 128 + (64 * ((i / 9) % 2))
+		sprite.position.y = (i / 9) * 32
+		sprite.frame = randi() % 81
+		add_child(sprite)
+		sprite = sprite.duplicate()
 	
 
 func showsomepopheads():
 	var image_from_code = readpcx(civ3root + "/Conquests/Art/SmallHeads/popHeads.pcx")
 	var sprite_from_code = civcolorsprite(image_from_code)
-	sprite_from_code.apply_scale(Vector2(2, 2))
+#	sprite_from_code.apply_scale(Vector2(2, 2))
 	for i in range(24):
 		sprite_from_code.region_enabled = true
 		var whichsprite = randi() % 180
