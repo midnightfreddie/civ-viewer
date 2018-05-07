@@ -1,12 +1,10 @@
  #tool
 extends Node2D
 
-const CIVCOLORSHADER = preload("res://testpophead.shader")
-
-# var mypalette = PoolColorArray()
-# var image_from_code = Image.new()
+const CIVCOLORSHADER = preload("res://civcolor.shader")
 
 # func _process(delta):
+ 	# Shuffle pophead indexes on child sprites
 # 	for N in get_children():
 # 		if typeof(N) == typeof(Sprite):
 # 			if randi() % 1000 == 1:
@@ -16,8 +14,6 @@ const CIVCOLORSHADER = preload("res://testpophead.shader")
 
 func _ready():
 	randomize()
-	# Set color palette size
-	# mypalette.resize(256)
 	var image_from_code = readpcx("temp/popHeads-ORIG.pcx")
 	# sprite from code only
 	var sprite_from_code = Sprite.new()
@@ -31,9 +27,6 @@ func _ready():
 	var throwsomeshade = ShaderMaterial.new()
 	throwsomeshade.shader = CIVCOLORSHADER
 	sprite_from_code.material = throwsomeshade
-	# vframes and hframes and region don't get along, and at least popheads has extra pixels
-	# sprite_from_code.hframes = sprite_from_code.texture.get_width() / 50
-	# sprite_from_code.vframes = sprite_from_code.texture.get_height() / 50
 	for i in range(24):
 		sprite_from_code.region_enabled = true
 		var whichsprite = randi() % 180
@@ -54,7 +47,6 @@ func readpcx(filename):
 	# assumes 8-bit image with 256-color 8-bit rgb palette
 	var file = File.new()
 	file.open(filename, file.READ)
-#	file.open("xpgc.pcx", file.READ)
 	# seek to margins
 	file.seek(0x4)
 	var leftmargin = file.get_16()
@@ -99,11 +91,10 @@ func readpcx(filename):
 	for i in range(64):
 		color = palette[i]
 		if i < 16 or i % 2 == 0:
-#			color.h = 0.05
+			# Alhpa-keying civ colors so civ color shader can hue-shift them
 			color.a = 0.1
 			palette[i] = color
 		
-
 	# seek to image data; assuming RLE-encoded
 	file.seek(0x80)
 	var i = 0

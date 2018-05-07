@@ -4,7 +4,6 @@ render_mode unshaded;
 
 uniform vec4 color:hint_color;
 
-//varying float foo;
 varying mat3 rotatecolor;
 
 // doing matrix calculations in the vertex instead of each pixel to save compute time
