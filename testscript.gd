@@ -2,6 +2,7 @@
 extends Node2D
 
 const CIVCOLORSHADER = preload("res://civcolor.shader")
+export var civ3root = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Sid Meier's Civilization III Complete"
 
 # func _process(delta):
  	# Shuffle pophead indexes on child sprites
@@ -14,7 +15,7 @@ const CIVCOLORSHADER = preload("res://civcolor.shader")
 
 func _ready():
 	randomize()
-	var image_from_code = readpcx("temp/popHeads-ORIG.pcx")
+	var image_from_code = readpcx("/Conquests/Art/SmallHeads/popHeads.pcx")
 	# sprite from code only
 	var sprite_from_code = Sprite.new()
 	# Create texture from image
@@ -42,11 +43,12 @@ func _ready():
 		sprite_from_code = sprite_from_code.duplicate()
 	pass
 
+# Given a filename, reads a PCX file, modifies the palette and returns an Image object
 func readpcx(filename):
 	# not a generalized pcx reader
 	# assumes 8-bit image with 256-color 8-bit rgb palette
 	var file = File.new()
-	file.open(filename, file.READ)
+	file.open(civ3root + filename, file.READ)
 	# seek to margins
 	file.seek(0x4)
 	var leftmargin = file.get_16()

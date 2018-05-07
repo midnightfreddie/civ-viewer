@@ -8,6 +8,7 @@
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+civ3root = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Sid Meier's Civilization III Complete"
 
 [node name="Sprite2" type="Sprite" parent="." index="0"]
 
