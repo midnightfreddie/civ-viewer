@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://testscript.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://temp/popHeads-ORIG.png" type="Texture" id=3]
+
+[node name="Node2D" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite2" type="Sprite" parent="." index="0"]
+
+visible = false
+position = Vector2( 372.743, 235.345 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+centered = false
+region_rect = Rect2( 300, 200, 50, 50 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+centered = false
+vframes = 20
+hframes = 9
+region_rect = Rect2( 300, 0, 50, 50 )
+_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
+
+

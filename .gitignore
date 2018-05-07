@@ -1,0 +1,5 @@
+*.pcx
+*.png
+temp/
+.import/
+*.import
