@@ -1,5 +1,7 @@
+.import/
+.fscache
+*~
+*.import
 *.pcx
 *.png
 temp/
-.import/
-*.import

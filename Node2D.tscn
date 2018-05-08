@@ -26,8 +26,6 @@ visible = false
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 centered = false
-vframes = 20
-hframes = 9
 region_rect = Rect2( 300, 0, 50, 50 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
 
