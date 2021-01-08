@@ -5,7 +5,7 @@ const CIVCOLORSHADER = preload("res://civcolor.shader")
 export var civ3root = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Sid Meier's Civilization III Complete"
 
 # func _process(delta):
- 	# Shuffle pophead indexes on child sprites
+	# Shuffle pophead indexes on child sprites
 # 	for N in get_children():
 # 		if typeof(N) == typeof(Sprite):
 # 			if randi() % 1000 == 1:
