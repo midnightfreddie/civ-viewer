@@ -11,3 +11,7 @@ While not the primary point, at the beginning I'm seeing if Godot can read and d
 - Made a civ-color shader that rotates the alhpa-keyed civ color
 - Used regions and sprites and displayed individual popheads
 - Toying with using Civ3 terrain graphics as tilesets in Godot
+
+## Use
+
+If you get an error about get index 0 on PoolColorArray, that means it failed to read the PCX file(s). Ensure that `civ3root` is set to the path to the root Civ3 folder either in the code or in the Inspector window under Script Variables -> Civ 3 Root.
