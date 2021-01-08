@@ -5,3 +5,4 @@
 *.pcx
 *.png
 temp/
+.mono/
