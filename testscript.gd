@@ -76,8 +76,8 @@ func readpcx(filename):
 	var topmargin = file.get_16()
 	var rightmargin = file.get_16()
 	var bottommargin = file.get_16()
-	var width = rightmargin - leftmargin
-	var height = bottommargin - topmargin
+	var width = rightmargin - leftmargin + 1
+	var height = bottommargin - topmargin + 1
 	# seek to bytes per scanline; assuming 1 color plane
 	file.seek(0x42)
 	# this is always even, so last byte may be junk if image width is odd
